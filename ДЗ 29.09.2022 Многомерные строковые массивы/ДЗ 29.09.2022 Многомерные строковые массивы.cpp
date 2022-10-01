@@ -2,7 +2,7 @@
        ДОМАШНЕЕ ЗАДАНИЕ
        Проект телефонная книга
        Поиск по имени: добавить итоговую инф (найдено Х записей)
-       ** Реализовать частичный поиск по подстроке petr? находит Petrovich Petrenko
+       ** Реализовать частичный поиск по подстроке (petr -  находит Petrovich Petrenko)
        Реализовать поиск по номеру телефона
    */
 #define _CRT_SECURE_NO_WARNINGS
@@ -95,7 +95,7 @@ bool input_phone()
     return res;
 }
 
-void search_by_name()
+void search_by_name()  // функция, выполняющая поиск по имени
 {
     const size_t BUF_SIZE = 100;
     char* name = new char[BUF_SIZE];  // константный указатель
@@ -115,6 +115,27 @@ void search_by_name()
     }
     delete[] name;
 }
+
+void search_by_phone()  // функция, выполняющая поиск по номеру телефона
+{
+    const size_t BUF_SIZE = 100;
+    char* phone = new char[BUF_SIZE];  // константный указатель
+    cout << "Phone: ";
+    cin.getline(phone, BUF_SIZE);
+
+    for (size_t i = 0; i < N; i++)
+    {
+        if (phonebook[i][1] != NULL)
+        {
+            if (_stricmp(phonebook[i][1], phone) == 0) // если совпадение найдено
+            {
+                cout << (i + 1) << " " << phonebook[i][0] << " "
+                    << phonebook[i][1] << "\n";
+            }
+        }
+    }
+    delete[] phone;
+}
 int main()
 {
     phonebook = new char** [N];  // первый уровень вложенности ячейки [ФИО][тлф]
@@ -132,10 +153,6 @@ int main()
 
     fill_demo();
 
-    cout << "1. Show all phones\n"
-         << "2. Add phone\n"
-         << "0. Exit\n";
-
     char user_choice[10]; // исп для того, чтобы исключить системные ошибки
     //int userChoice;    // приводит к ошибкам
     //cin >> userChoice; // если вводится не число
@@ -144,6 +161,7 @@ int main()
         cout << "1. Show all phones\n"
              << "2. Add phone\n"
              << "3. Search by name\n"
+             << "4. Search by phone\n"
              << "0. Exit\n";
 
         cout << "Make a choice: ";
@@ -170,6 +188,7 @@ int main()
                 }
                 break;
             case '3': search_by_name(); break;
+            case '4': search_by_phone(); break;
             case '0': break;
             default:
             cout << colors::PURPLE << "Incorrect choice (choose from menu)\n" << colors::RESET;
