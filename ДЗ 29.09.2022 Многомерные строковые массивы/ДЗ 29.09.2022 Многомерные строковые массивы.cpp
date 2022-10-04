@@ -120,6 +120,7 @@ void search_by_name()  // функция, выполняющая поиск по
     {
         cout << colors::RED << " Found " << count << " contact in phone book! " << colors::RESET;
     }
+
     delete[] name;
 }
 
