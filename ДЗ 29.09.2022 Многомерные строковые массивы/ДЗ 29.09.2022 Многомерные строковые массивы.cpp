@@ -102,16 +102,23 @@ void search_by_name()  // функция, выполняющая поиск по
     cout << "Name: ";
     cin.getline(name, BUF_SIZE);
 
+    int count = 0;  // счётчик кол-ва найденных контактов
     for (size_t i = 0; i < N; i++)
     {
         if (phonebook[i][0] != NULL)
         {
             if (_stricmp(phonebook[i][0], name) == 0) // если совпадение найдено
             {
+                count++;  // если совпадение найдено, то увеличиваем счётчик на 1
+                cout << colors::GREEN << " Found " << count << " contact in phone book: " << colors::RESET;
                 cout << (i + 1) << " " << phonebook[i][0] << " "
-                    << phonebook[i][1] << "\n";
+                    << phonebook[i][1] << "\n\n";
             }
         }
+    }
+    if (count == 0)  // если контактов не найдено, то сообщаем об этом пользователю
+    {
+        cout << colors::RED << " Found " << count << " contact in phone book! " << colors::RESET;
     }
     delete[] name;
 }
@@ -123,16 +130,23 @@ void search_by_phone()  // функция, выполняющая поиск п�
     cout << "Phone: ";
     cin.getline(phone, BUF_SIZE);
 
+    int count = 0;  // счётчик кол-ва найденных контактов
     for (size_t i = 0; i < N; i++)
     {
         if (phonebook[i][1] != NULL)
         {
             if (_stricmp(phonebook[i][1], phone) == 0) // если совпадение найдено
             {
+                count++;  // если совпадение найдено, то увеличиваем счётчик на 1
+                cout << colors::GREEN << " Found " << count << " contact in phone book: " << colors::RESET;
                 cout << (i + 1) << " " << phonebook[i][0] << " "
-                    << phonebook[i][1] << "\n";
+                    << phonebook[i][1] << "\n\n";
             }
         }
+    }
+    if (count == 0)  // если контактов не найдено, то сообщаем об этом пользователю
+    {
+        cout << colors::RED << " Found " << count << " contact in phone book! " << colors::RESET;
     }
     delete[] phone;
 }
